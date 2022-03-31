@@ -9,35 +9,40 @@ const score = document.querySelector('.score')
 const highScore = document.querySelector('.highscore')
 const bgColor = document.querySelector('.box')
 
-
+let scoreGame = 20
 let randomNumber = Math.floor(Math.random()*20+1)
-checkBtn.addEventListener('click', check)
-
-let scoreNumber = 20
- function check() {
-     const checkValue = +guessInput.value
-    //  console.log(randomNumber);
-     if(checkValue) {
-         if(randomNumber == checkValue) {
-            message.textContent = 'You are Win'
+// console.log(randomNumber);
+checkBtn.addEventListener('click', function() {
+    let checkValue = +guessInput.value
+    if(checkValue) {
+        if(randomNumber == checkValue) {
+            message.textContent = "You are win!"
             bgColor.style.background = "green"
-            number.textContent = randomNumber     
-            randomNumber = Math.floor(Math.random()*20+1)
+            number.textContent = randomNumber
+            Math.floor(Math.random()*20+1)
+         }
+        else if(randomNumber > checkValue) {
+            message.textContent = "Siz o'ylagan son katta"
+        }
+        else if(randomNumber < checkValue) {
+            message.textContent = "Siz o'ylagan son kichik"
         }
         else {
-            message.textContent = 'You Lose'
-            scoreNumber--
-            score.textContent = scoreNumber
-            highScore.textContent = scoreNumber
+            message.textContent = "You lose"
+            scoreGame--
+            bgColor.style.background = "#ec7063"
+            setTimeout(()=> {bgColor.style.background = "#222"},300)
+            highScore.textContent = 19
+            score.textContent = scoreGame
         }
-    }
-    else {
-        message.textContent = 'No number'
-    }
-    }
 
-    againBtn.addEventListener('click' , again)
+    }else {
+        message.textContent = "No number!"
+    }
+})
 
-function again() {   
-    window.location.reload();    
-}
+againBtn.addEventListener('click', function() {
+    window.location.reload();
+})
+
+
